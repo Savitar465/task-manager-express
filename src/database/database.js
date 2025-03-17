@@ -1,15 +1,14 @@
-import { Sequelize } from 'sequelize';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import {Sequelize} from 'sequelize';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const database = process.env.DB_NAME;
+const user = process.env.DB_USER;
+const password = process.env.DB_PASSWORD;
+const host = process.env.DB_HOST;
 
-export const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: join(__dirname, '../../database.sqlite'),
-  logging: false
+export const sequelize = new Sequelize(database, user, password, {
+    host: host,
+    dialect: 'postgres',
 });
