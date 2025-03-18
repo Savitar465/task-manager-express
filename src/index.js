@@ -12,7 +12,9 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
-
+app.use(cors({
+  origin: 'https://task-manager-react-5bo0.onrender.com'
+}));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
