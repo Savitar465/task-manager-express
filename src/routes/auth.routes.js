@@ -18,6 +18,6 @@ router.post('/login', [
 
 router.get('/me', getMyInfo).use(authenticateToken);
 // Add the verify token route
-router.post('/verify-token', verifyToken);
+router.get('/verify-token', verifyToken);
 
 export default router;
