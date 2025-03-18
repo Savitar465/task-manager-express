@@ -88,3 +88,18 @@ export const getMyInfo = async (req, res) => {
         res.status(500).json({message: 'Error fetching user', error: error.message});
     }
 }
+
+export const verifyToken = (req, res) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (!token) {
+        return res.status(400).json({ message: 'Token is required' });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Invalid token' });
+        }
+        res.status(200).json({ message: 'Token is valid', user: decoded });
+    });
+};
