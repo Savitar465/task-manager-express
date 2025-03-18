@@ -99,7 +99,8 @@ export const verifyToken = (req, res) => {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.status(401).json({ message: 'Invalid token' });
+        } else{
+            return res.status(200).json({ message: 'Token is valid', user: decoded });
         }
-        res.status(200).json({ message: 'Token is valid', user: decoded });
     });
 };
